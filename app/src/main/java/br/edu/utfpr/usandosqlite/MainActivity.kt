@@ -51,8 +51,12 @@ class MainActivity : AppCompatActivity() {
         binding.btIncluir.setOnClickListener {
             btIncluirOnClick()
         }
-        binding.btAlterar.setOnClickListener {  }
-        binding.btExcluir.setOnClickListener {  }
+        binding.btAlterar.setOnClickListener {
+            btAlterarOnClick()
+        }
+        binding.btExcluir.setOnClickListener {
+            btExcluirOnClick()
+        }
         binding.btPesquisar.setOnClickListener {  }
         binding.btListar.setOnClickListener {
             btListarOnClick()
@@ -71,6 +75,41 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(this, "Sucesso!", Toast.LENGTH_SHORT).show()
     }
+
+    fun btAlterarOnClick() {
+        val cod = binding.etCod.text.toString()
+        val nome = binding.etNome.text.toString()
+        val telefone = binding.etTelefone.text.toString()
+
+        val registro = ContentValues()
+        registro.put("nome", nome)
+        registro.put("telefone", telefone)
+
+        banco.update(
+            "cadastro",
+            registro,
+            "_id = $cod",
+            null
+        )
+
+        Toast.makeText(this, "Sucesso!", Toast.LENGTH_SHORT).show()
+
+    }
+
+    fun btExcluirOnClick() {
+
+        val cod = binding.etCod.text.toString()
+
+        banco.delete(
+            "cadastro",
+            "_id = $cod",
+            null
+        )
+
+        Toast.makeText(this, "Sucesso!", Toast.LENGTH_SHORT).show()
+
+    }
+
 
     fun btListarOnClick() {
 
