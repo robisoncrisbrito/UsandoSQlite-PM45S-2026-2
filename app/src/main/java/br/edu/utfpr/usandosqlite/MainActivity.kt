@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
             null
         )
 
+        banco.execSQL( "DROP TABLE IF EXISTS cadastro" )
+
         banco.execSQL(
             "CREATE TABLE IF NOT EXISTS cadastro " +
                     "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -131,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             binding.etNome.setText( registros.getString( NOME ) )
             binding.etTelefone.setText( registros.getString( TELEFONE ) )
         } else {
-            Toast.makeText(this, "Registro não encontrado!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Registro não encontrado!",  Toast.LENGTH_SHORT).show()
         }
     }
 
