@@ -57,7 +57,9 @@ class MainActivity : AppCompatActivity() {
         binding.btExcluir.setOnClickListener {
             btExcluirOnClick()
         }
-        binding.btPesquisar.setOnClickListener {  }
+        binding.btPesquisar.setOnClickListener {
+            btPesquisarOnClick()
+        }
         binding.btListar.setOnClickListener {
             btListarOnClick()
         }
@@ -111,6 +113,29 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun btPesquisarOnClick() {
+
+        val cod = binding.etCod.text.toString()
+
+        val registros: Cursor = banco.query(
+            "cadastro",
+            null,
+            "_id = $cod",
+            null,
+            null,
+            null,
+            null
+        )
+
+        if( registros.moveToNext() ) {
+            binding.etNome.setText( registros.getString( NOME ) )
+            binding.etTelefone.setText( registros.getString( TELEFONE ) )
+        } else {
+            Toast.makeText(this, "Registro não encontrado!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     fun btListarOnClick() {
 
         val registros: Cursor = banco.query(
@@ -126,11 +151,11 @@ class MainActivity : AppCompatActivity() {
         val saida = StringBuilder()
 
         while( registros.moveToNext() ) {
-            saida.append( registros.getInt( 0 ) )
+            saida.append( registros.getInt( ID ) )
             saida.append( " - " )
-            saida.append( registros.getString( 1 ) )
+            saida.append( registros.getString( NOME ) )
             saida.append( " - " )
-            saida.append( registros.getString( 2 ) )
+            saida.append( registros.getString( TELEFONE ) )
             saida.append( "\n" )
         }
 
@@ -138,4 +163,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-}
+    companion object {
+        private const val ID = 0
+        private const val NOME = 1
+        private const val TELEFONE = 2
+    }
+
+
+} //fim da MainActivity
