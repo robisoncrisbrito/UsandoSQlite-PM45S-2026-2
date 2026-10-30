@@ -5,13 +5,10 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
-import br.edu.utfpr.usandosqlite.MainActivity
-import br.edu.utfpr.usandosqlite.MainActivity.Companion.NOME
-import br.edu.utfpr.usandosqlite.MainActivity.Companion.TELEFONE
 import br.edu.utfpr.usandosqlite.entity.Cadastro
 
-class DatabaseHandler( context: Context) : SQLiteOpenHelper( context, "banco.db", null, 3) {
+class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, "banco.db", null, 1) {
+
     override fun onCreate(banco: SQLiteDatabase?) {
         banco?.execSQL(
             "CREATE TABLE IF NOT EXISTS cadastro " +
@@ -26,7 +23,7 @@ class DatabaseHandler( context: Context) : SQLiteOpenHelper( context, "banco.db"
         p1: Int,
         p2: Int
     ) {
-        banco?.execSQL( "DROP TABLE IF EXISTS cadastro" )
+        banco?.execSQL("DROP TABLE IF EXISTS cadastro")
         onCreate(banco)
     }
 
@@ -38,7 +35,7 @@ class DatabaseHandler( context: Context) : SQLiteOpenHelper( context, "banco.db"
         registro.put("nome", cadastro.nome)
         registro.put("telefone", cadastro.telefone)
 
-        banco.insert( "cadastro", null, registro)
+        banco.insert("cadastro", null, registro)
 
     }
 
@@ -81,11 +78,11 @@ class DatabaseHandler( context: Context) : SQLiteOpenHelper( context, "banco.db"
             null
         )
 
-        if( registros.moveToNext() ) {
+        if (registros.moveToNext()) {
             val cadastro = Cadastro(
                 id,
-                registros.getString( NOME ),
-                registros.getString( TELEFONE )
+                registros.getString(NOME),
+                registros.getString(TELEFONE)
             )
             return cadastro
         } else {
@@ -108,15 +105,15 @@ class DatabaseHandler( context: Context) : SQLiteOpenHelper( context, "banco.db"
 
         var saida = mutableListOf<Cadastro>()
 
-        while( registros.moveToNext() ) {
+        while (registros.moveToNext()) {
 
             val cadastro = Cadastro(
-                registros.getInt( ID ),
-                registros.getString( NOME ),
-                registros.getString( TELEFONE )
+                registros.getInt(ID),
+                registros.getString(NOME),
+                registros.getString(TELEFONE)
             )
 
-            saida.add( cadastro )
+            saida.add(cadastro)
         }
 
         return saida
