@@ -1,8 +1,6 @@
 package br.edu.utfpr.usandosqlite
 
-import android.content.ContentValues
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -102,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
     fun btListarOnClick() {
 
-        val registros = banco.listar()
+        /*val registros = banco.listar()
 
         val saida = StringBuilder()
 
@@ -116,6 +114,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this, saida.toString(), Toast.LENGTH_SHORT).show()
+*/
+        val intent = Intent(this, ListarActivity::class.java)
+        startActivity(intent)
 
     }
 
