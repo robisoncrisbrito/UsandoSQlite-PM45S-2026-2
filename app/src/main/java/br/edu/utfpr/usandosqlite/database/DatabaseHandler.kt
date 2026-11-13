@@ -90,6 +90,22 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, "banco.db", 
         }
     }
 
+    fun listarCursor(): Cursor {
+        val banco = this.writableDatabase
+
+        val registros: Cursor = banco.query(
+            "cadastro",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        return registros
+    }
+
     fun listar(): MutableList<Cadastro> {
         val banco = this.writableDatabase
 
