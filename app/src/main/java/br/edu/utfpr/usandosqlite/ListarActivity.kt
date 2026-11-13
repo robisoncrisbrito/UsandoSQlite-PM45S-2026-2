@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.SimpleCursorAdapter
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.utfpr.usandosqlite.adapter.MeuAdapter
 import br.edu.utfpr.usandosqlite.database.DatabaseHandler
 import br.edu.utfpr.usandosqlite.databinding.ActivityListarBinding
 
@@ -19,16 +20,9 @@ class ListarActivity : AppCompatActivity() {
 
         banco = DatabaseHandler(this)
 
-        val registros = banco.listarCursor()
+        val registros = banco.listar()
 
-        val adapter = SimpleCursorAdapter(
-            this,
-            android.R.layout.simple_list_item_2,
-            registros,
-            arrayOf( "nome", "telefone" ),
-            intArrayOf(android.R.id.text1, android.R.id.text2),
-            0
-        )
+        val adapter = MeuAdapter( this, registros )
 
         binding.lvPrincipal.adapter = adapter
 

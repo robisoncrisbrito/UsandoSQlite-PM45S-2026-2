@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import br.edu.utfpr.usandosqlite.R
 import br.edu.utfpr.usandosqlite.entity.Cadastro
@@ -35,14 +36,20 @@ class MeuAdapter(val context: Context, val registros: MutableList<Cadastro>) : B
         val tvNomeElementoLista = elementoLista.findViewById<TextView>( R.id.tvNomeElementoLista )
         val tvTelefoneElementoLista = elementoLista.findViewById<TextView>( R.id.tvTelefoneElementoLista )
 
+        val image = elementoLista.findViewById<ImageView>( R.id.imageView)
+
         val cadastro = registros.get(pos)
 
         tvNomeElementoLista.text = cadastro.nome
         tvTelefoneElementoLista.text = cadastro.telefone
 
-        return elementoLista
-    }
+        if ( pos % 2 == 0 ) {
+            image.setImageResource(android.R.drawable.star_big_on)
+        } else {
+            image.setImageResource(android.R.drawable.star_big_off)
+        }
 
+        return elementoLista
     }
 
 }
