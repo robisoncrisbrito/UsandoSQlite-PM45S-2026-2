@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import br.edu.utfpr.usandosqlite.R
 import br.edu.utfpr.usandosqlite.entity.Cadastro
 
@@ -35,8 +37,8 @@ class MeuAdapter(val context: Context, val registros: MutableList<Cadastro>) : B
 
         val tvNomeElementoLista = elementoLista.findViewById<TextView>( R.id.tvNomeElementoLista )
         val tvTelefoneElementoLista = elementoLista.findViewById<TextView>( R.id.tvTelefoneElementoLista )
-
         val image = elementoLista.findViewById<ImageView>( R.id.imageView)
+        val btEditarElementoLista = elementoLista.findViewById<ImageButton>( R.id.btEditarElementoLista )
 
         val cadastro = registros.get(pos)
 
@@ -47,6 +49,10 @@ class MeuAdapter(val context: Context, val registros: MutableList<Cadastro>) : B
             image.setImageResource(android.R.drawable.star_big_on)
         } else {
             image.setImageResource(android.R.drawable.star_big_off)
+        }
+
+        btEditarElementoLista.setOnClickListener {
+            Toast.makeText(context, "Item ${pos} selecionado", Toast.LENGTH_SHORT).show()
         }
 
         return elementoLista
